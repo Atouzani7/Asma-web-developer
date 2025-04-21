@@ -1,13 +1,21 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  ManyToOne,
+} from 'typeorm';
 import { Project } from 'src/project/entities/project.entity';
 import { Profile } from 'src/profile/entities/profile.entity';
 
 enum Category {
   BACKEND = 'backend',
   FRONTEND = 'frontend',
-  MOBILE = 'mobile',
+  TEST = 'test',
   DEVOPS = 'devops',
   AGILE = 'agile',
+  FULLSTACK = 'fullstack',
+  DESIGN = 'design UI / UX',
 }
 
 @Entity()
@@ -19,10 +27,15 @@ export class Skill {
   name: string;
 
   @Column({ type: 'enum', enum: Category })
-  category: Category;
+  category: Category = Category.BACKEND;
 
-  @ManyToMany(() => Project, (project) => project.skill)
-  projects: Project[];
+  @Column()
+  image: string;
+
+  // @ManyToMany(() => Project, (project) => project.skill)
+  // projects: Project[];
+  @ManyToOne(() => Project, (project) => project.skill)
+  project: Project;
 
   @ManyToMany(() => Profile, (profile) => profile.skills)
   profiles: Profile[];

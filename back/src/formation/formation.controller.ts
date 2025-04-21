@@ -1,14 +1,24 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { FormationService } from './formation.service';
 import { CreateFormationDto } from './dto/create-formation.dto';
 import { UpdateFormationDto } from './dto/update-formation.dto';
+import { Formation } from './entities/formation.entity';
 
 @Controller('formation')
 export class FormationController {
   constructor(private readonly formationService: FormationService) {}
 
   @Post()
-  create(@Body() createFormationDto: CreateFormationDto) {
+  create(@Body() createFormationDto: CreateFormationDto): Promise<Formation> {
+    console.log('par ici la crééation via le controller');
     return this.formationService.create(createFormationDto);
   }
 
@@ -23,7 +33,10 @@ export class FormationController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFormationDto: UpdateFormationDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateFormationDto: UpdateFormationDto,
+  ) {
     return this.formationService.update(+id, updateFormationDto);
   }
 

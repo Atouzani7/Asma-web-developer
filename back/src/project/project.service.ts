@@ -1,26 +1,68 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
+import { Project } from './entities/project.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { DeleteResult, In, Repository } from 'typeorm';
+import { SkillsService } from 'src/skills/skills.service';
+import { Skill } from 'src/skills/entities/skill.entity';
 
 @Injectable()
 export class ProjectService {
-  create(createProjectDto: CreateProjectDto) {
-    return 'This action adds a new project';
+  constructor(
+    @InjectRepository(Project)
+    private projectRepository: Repository<Project>,
+    @InjectRepository(Skill)
+    private readonly skillRepository: Repository<Skill>, // <-- ICI LE PROBLÈME
+
+    private readonly skillsService: SkillsService,
+  ) {}
+
+  async create(createProjectDto: CreateProjectDto): Promise<Project> {
+    const project = this.projectRepository.create(createProjectDto);
+    return await this.projectRepository.save(project);
   }
 
-  findAll() {
-    return `This action returns all project`;
+  async findAll(): Promise<Project[]> {
+    return await this.projectRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} project`;
+  async findOne(id: number): Promise<Project> {
+    return await this.projectRepository.findOne({ where: { id } });
   }
 
-  update(id: number, updateProjectDto: UpdateProjectDto) {
-    return `This action updates a #${id} project`;
+  async update(
+    id: number,
+    updateProjectDto: UpdateProjectDto,
+  ): Promise<Project> {
+    console.log('DTO reçu pour update:', updateProjectDto);
+    const project = await this.projectRepository.findOne({ where: { id } });
+    if (!project) {
+      throw new NotFoundException(`Project with ID ${id} not found`);
+    }
+
+    // Mise à jour des champs simples
+    project.name = updateProjectDto.name ?? project.name;
+    project.description = updateProjectDto.description ?? project.description;
+    project.image = updateProjectDto.image ?? project.image;
+    project.link = updateProjectDto.link ?? project.link;
+
+    // Mise à jour des skills (relation)
+    if (updateProjectDto.skill && Array.isArray(updateProjectDto.skill)) {
+      const skillEntities = await this.skillRepository.find({
+        where: { id: In(updateProjectDto.skill) },
+      });
+      project.skill = skillEntities;
+    }
+
+    console.log('Mise à jour du projet:', project);
+
+    const updatedProject = await this.projectRepository.save(project);
+    return updatedProject;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} project`;
+  async remove(id: number): Promise<DeleteResult> {
+    const project = await this.findOne(id);
+    return await this.projectRepository.delete(id);
   }
 }

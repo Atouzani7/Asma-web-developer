@@ -1,10 +1,16 @@
 import { Profile } from 'src/profile/entities/profile.entity';
 import { Skill } from 'src/skills/entities/skill.entity';
-import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryColumn,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Project {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
@@ -22,6 +28,6 @@ export class Project {
   @OneToMany(() => Profile, (profile) => profile.projects)
   profile: Profile;
 
-  @OneToMany(() => Skill, (skill) => skill.projects)
+  @OneToMany(() => Skill, (skill) => skill.project, { cascade: true })
   skill: Skill[];
 }

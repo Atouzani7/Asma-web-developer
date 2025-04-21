@@ -1,26 +1,44 @@
-import { Injectable } from '@nestjs/common';
+import { Body, Injectable } from '@nestjs/common';
 import { CreateFormationDto } from './dto/create-formation.dto';
 import { UpdateFormationDto } from './dto/update-formation.dto';
+import { DeleteResult, In, Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Formation } from './entities/formation.entity';
 
 @Injectable()
 export class FormationService {
-  create(createFormationDto: CreateFormationDto) {
-    return 'This action adds a new formation';
+  constructor(
+    @InjectRepository(Formation)
+    private readonly formationRepository: Repository<Formation>,
+  ) {}
+
+  async create(
+    @Body() CreateFormationDto: CreateFormationDto,
+  ): Promise<Formation> {
+    const formation = await this.formationRepository.create(CreateFormationDto);
+    console.log('par ici le service', formation);
+    return await this.formationRepository.save(formation);
   }
 
-  findAll() {
-    return `This action returns all formation`;
+  findAll(): Promise<Formation[]> {
+    return this.formationRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} formation`;
+  findOne(id: number): Promise<Formation> {
+    return this.formationRepository.findOne({ where: { id } });
   }
 
-  update(id: number, updateFormationDto: UpdateFormationDto) {
-    return `This action updates a #${id} formation`;
+  async update(
+    id: number,
+    updateFormationDto: UpdateFormationDto,
+  ): Promise<Formation> {
+    const formation = await this.findOne(id);
+    Object.assign(formation, updateFormationDto);
+    return await this.formationRepository.save(formation);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} formation`;
+  remove(id: number): Promise<DeleteResult> {
+    const formation = this.findOne(id);
+    return this.formationRepository.delete(id);
   }
 }

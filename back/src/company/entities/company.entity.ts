@@ -27,7 +27,7 @@ export class Company {
   secteur: string;
 
   @Column({ nullable: true })
-  starDate: Date;
+  startDate: Date;
 
   @Column({ nullable: true })
   endDate: Date;

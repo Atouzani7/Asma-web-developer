@@ -1,9 +1,17 @@
 import { Profile } from 'src/profile/entities/profile.entity';
-import { Column, Entity, ManyToMany, ManyToOne, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Generated,
+  ManyToMany,
+  ManyToOne,
+  PrimaryColumn,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Formation {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
@@ -16,7 +24,7 @@ export class Formation {
   school: string;
 
   @Column()
-  starDate: Date;
+  startDate: Date;
 
   @Column({ nullable: true })
   endDate: Date;

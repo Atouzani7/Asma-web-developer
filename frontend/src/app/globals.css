@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1E1E1E;
+    --foreground: #E6E6E6;
+  }
+}
+
+.font-GillSans {
+  font-family: GillSans, sans-serif;
+}
+
+.font-Avenir {
+  font-family: Avenir, sans-serif;
+}
+
+.font-Cocomat-light {
+  font-family: Cocomat-Light, sans-serif;
+}
+
+.font-Cocomat-ultralight {
+  font-family: Cocomat-Ultralight, sans-serif;  
+}
+
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}

@@ -49,8 +49,8 @@ export default function Introduction() {
 
 
     return (
-        <div className="flex justify-center items-center h-[70vh] md:h-[60vh] lg:h-[70vh] max-h-[80vh] p-4 bg-black text-white">
-            <div className="w-full max-w-4xl">
+        <div className="flex justify-center items-center h-[70vh] md:h-[60vh] lg:h-[70vh] max-h-[80vh] p-4 mt-20  bg-black text-white">
+            <div id="introduction" className="w-full max-w-4xl">
                 {/* Avatar et introduction */}
                 <div className="flex flex-row gap-8 m-auto  p-2 justify-center items-center ">
                     <Image

@@ -26,7 +26,7 @@ export class Project {
   link: string;
 
   @OneToMany(() => Profile, (profile) => profile.projects)
-  profile: Profile;
+  profile: Profile[];
 
   @OneToMany(() => Skill, (skill) => skill.project, { cascade: true })
   skill: Skill[];

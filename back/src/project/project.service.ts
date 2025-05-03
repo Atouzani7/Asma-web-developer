@@ -24,7 +24,20 @@ export class ProjectService {
   }
 
   async findAll(): Promise<Project[]> {
-    return await this.projectRepository.find();
+    // Récupérer tous les projets avec leurs compétences associées
+    const projects = await this.projectRepository.find({
+      relations: ['skill'],
+    });
+    // console.log('Projets récupérés:', projects);
+    for (const project of projects) {
+      // console.log(project.skill.map((s) => s.name));
+      // const skills = await this.skillsService.findAll();
+      // console.log(
+      //   'Skills récupérées:',
+      //   skills.map((s) => s.name),
+      // );
+    }
+    return await projects;
   }
 
   async findOne(id: number): Promise<Project> {
@@ -35,7 +48,7 @@ export class ProjectService {
     id: number,
     updateProjectDto: UpdateProjectDto,
   ): Promise<Project> {
-    console.log('DTO reçu pour update:', updateProjectDto);
+    // console.log('DTO reçu pour update:', updateProjectDto);
     const project = await this.projectRepository.findOne({ where: { id } });
     if (!project) {
       throw new NotFoundException(`Project with ID ${id} not found`);

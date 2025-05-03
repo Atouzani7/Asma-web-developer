@@ -1,91 +1,133 @@
+"use client";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Project() {
-    const projects = [
-        {
-            title: "Nom du Projet",
-            description: "Une brève description de votre projet.",
-            imageUrl: "./vercel.svg",
-            link: "https://example.com",
-        },
-        {
-            title: "Nom du Projet",
-            description: "Une breve description de votre projet.",
-            imageUrl: "./logoAT.svg",
-            link: "https://example.com",
-        },
-        {
-            title: "Nom du Projet",
-            description: "Une breve description de votre projet.",
-            imageUrl: "./file.svg",
-            link: "https://example.com",
-        }, {
-            title: "Nom du Projet",
-            description: "Une breve description de votre projet.",
-            imageUrl: "./logoAT.svg",
-            link: "https://example.com",
-        },
-        // Ajoutez d'autres projets ici
-    ];
+    // const projects = [
+    //     {
+    //         title: "Nom du Projet",
+    //         description: "Une brève description de votre projet.",
+    //         imageUrl: "./vercel.svg",
+    //         link: "https://example.com",
+    //     },
+    //     {
+    //         title: "Nom du Projet",
+    //         description: "Une breve description de votre projet.",
+    //         imageUrl: "./logoAT.svg",
+    //         link: "https://example.com",
+    //     },
+    //     {
+    //         title: "Nom du Projet",
+    //         description: "Une breve description de votre projet.",
+    //         imageUrl: "./file.svg",
+    //         link: "https://example.com",
+    //     }, {
+    //         title: "Nom du Projet",
+    //         description: "Une breve description de votre projet.",
+    //         imageUrl: "./logoAT.svg",
+    //         link: "https://example.com",
+    //     },
+    //     // Ajoutez d'autres projets ici
+    // ];
+    interface Project {
+        id?: number;
+        name: string;
+        description: string;
+        image: string;
+        link: string;
+        skills: string;
+    }
+
+    // const [projects, setProjects] = useState([]);
+    const [projects, setProjects] = useState<Project[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const fetchProjects = async () => {
+        try {
+            setLoading(true);
+            // console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
+            // console.log("API URL côté client:", process.env.NEXT_PUBLIC_API_URL);
+            // console.log("Test variable:", process.env.NEXT_PUBLIC_TEST_VAR);
+
+
+            const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+            console.log('Using API base URL:', baseUrl);
+            const finalUrl = `${baseUrl}/project`;
+            console.log('✅ URL utilisée dans fetch:', finalUrl);
+
+            const response = await fetch(`${baseUrl}/project`);
+
+
+
+            if (!response.ok) {
+                throw new Error("Erreur lors de la récupération des projets");
+            }
+            const data = await response.json();
+            // console.log("data", data);
+            setProjects(data);
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchProjects();
+    }, []);
+    // console.log("projets", projects);
+    if (!projects || loading) {
+        return <div className="text-white text-center mt-20">Chargement...</div>;
+    }
 
     return (
-        // <div className="flex flex-col items-center gap-8">
-        // <div className="border-2 border-lila-100  justify-center items-center h-[70vh] md:h-[60vh] lg:h-[70vh] max-h-[80vh] p-4 bg-black  text-white">
-        <div className="border-2 border-lila-100 grid place-items-center h-[70vh] md:h-[60vh] lg:h-[70vh] max-h-[80vh] p-4 bg-black text-white">
 
+        <div className=" grid place-items-center h-auto min-h-[70vh] p-2 bg-black text-white">
+            <h2 className="text-2xl md:text-3xl font-Avenir text-center mb-6">Projets</h2>
 
-            <h2 className="text-3xl font-Avenir text-center mb-6">Projets</h2>
-
-            <div className="flex flex-wrap gap-8 justify-center align-center">
+            <div className="flex flex-wrap gap-6 md:gap-8 justify-center items-center">
                 {projects.map((project, index) => (
                     <div
-                        key={index}
-                        className="relative w-[300px] h-[200px] rounded-lg overflow-hidden group"
+                        key={project.id ?? index} // ✅ id si dispo, sinon index
+                        className="relative w-[90%] sm:w-[300px] h-[200px] sm:h-[220px] md:h-[250px] rounded-lg overflow-hidden group"
                     >
-                        {/* Image visible */}
-                        {/* <div className="relative w-full h-full flex justify-center items-center">
-                            <Image
-                                src={project.imageUrl}
-                                alt={project.title}
-                                width={180}
-                                height={38}
-                                className="object-cover transition-transform duration-300 group-hover:scale-105 flex justify-center items-center"
-                            />
-                        </div> */}
-
-
                         <div className="relative w-full h-full flex justify-center items-center rounded-lg overflow-hidden group">
+
                             <Image
-                                src={project.imageUrl}
-                                alt={project.title}
-                                width={180}
-                                height={38}
-                                className="object-cover transition-transform duration-300 group-hover:scale-105 flex justify-center items-center"
+                                src={project.image}
+                                alt={project.name}
+                                width={300}
+                                height={250}
+                                className="object-cover  transition-transform duration-300 group-hover:scale-105"
                             />
-                            {/* Pulsation */}
+
+
+
                             <div className="absolute inset-0 rounded-lg border-2 border-lila-100 opacity-0 group-hover:opacity-100 group-hover:animate-pulse"></div>
                         </div>
 
-
-
-                        {/* Contenu affiché au hover */}
                         <div className="absolute inset-0 bg-lila-100 bg-opacity-80 flex flex-col items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <h3 className="text-xl font-bold text-black">{project.title}</h3>
-                            <p className="text-sm text-black transition-colors duration-200 mt-2 text-center">
+                            <h3 className="text-lg md:text-xl font-bold text-black">{project.name}</h3>
+                            <p className="text-xs md:text-sm text-black transition-colors duration-200 mt-2 text-center">
                                 {project.description}
                             </p>
-                            <div className="mt-4">
-                                <h3 className="text-base font-bold text-black">{"Langages utilisés"}</h3>
-                                <p className="text-sm text-black transition-colors duration-200 mt-2 text-center">
-                                    {project.description}
-                                </p>
-                            </div>
+
+                            {project.skills && (
+                                <div className="mt-4">
+                                    <h4 className="text-sm md:text-base font-bold text-black">Technologies utilisées</h4>
+                                    <p className="text-xs md:text-sm text-black transition-colors duration-200 mt-2 text-center">
+                                        {Array.isArray(project.skills)
+                                            ? project.skills.join(', ')
+                                            : project.skills}
+                                    </p>
+                                </div>
+                            )}
 
                             <a
-                                href={project.link}
+                                // href={project.link}
+                                href={`/projects/${project.id}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="mt-4 px-4 py-2 bg-greenPastel-100 text-black text-sm font-medium rounded-md hover:bg-greenPastel-200 transition-colors duration-200"
+                                className="mt-4 px-3 py-2 bg-greenPastel-100 text-black text-xs md:text-sm font-medium rounded-md hover:bg-greenPastel-200 transition-colors duration-200"
                             >
                                 Voir le projet
                             </a>
@@ -94,5 +136,6 @@ export default function Project() {
                 ))}
             </div>
         </div>
+
     );
 }

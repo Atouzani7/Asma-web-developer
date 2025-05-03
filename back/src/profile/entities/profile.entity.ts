@@ -31,6 +31,9 @@ export class Profile {
   @Column({ nullable: true })
   cv: string;
 
+  @Column({ nullable: true })
+  logo: string;
+
   @ManyToMany(() => Skill, (skill) => skill.profiles)
   @JoinTable()
   skills: Skill[];

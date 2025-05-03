@@ -1,33 +1,6 @@
-// export default function Contact() {
-//     return (
-//         <div className="border-2 border-lila-100 flex justify-center items-center h-[70vh] md:h-[60vh] lg:h-[70vh] max-h-[80vh] p-4 bg-black text-white">
-
-//             <h2 className="text-3xl font-Avenir text-center mb-6 border-2 border-lila-100">Contact</h2>
-
-//             <form action="/my-handling-form-page" method="post">
-//                 <p>
-//                     <label htmlFor="name">Name:</label>
-//                     <input type="text" id="name" name="user_name" />
-//                 </p>
-//                 <p>
-//                     <label htmlFor="mail">Email:</label>
-//                     <input type="email" id="mail" name="user_email" />
-//                 </p>
-//                 <p>
-//                     <label htmlFor="msg">Message:</label>
-//                     <textarea id="msg" name="user_message"></textarea>
-//                 </p>
-//             </form>
-
-
-//         </div>
-//     );
-// }
-
-
-// pages/contact.js
 "use client"
 import { useState } from "react";
+import emailjs from "emailjs-com";
 
 export default function Contact() {
     const [formData, setFormData] = useState({
@@ -37,48 +10,46 @@ export default function Contact() {
         message: "",
     });
 
-    // const [status, setStatus] = useState(null);
+    const [status, setStatus] = useState<"loading" | "success" | "error" | null>(null);  // Statut de l'envoi (loading, success, error)
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     setStatus("loading");
+    const handleSubmit = (e) => {
+        e.preventDefault();  // Empêcher le rechargement de la page
 
-    //     try {
-    //       const response = await fetch("/api/contact", {
-    //         method: "POST",
-    //         headers: { "Content-Type": "application/json" },
-    //         body: JSON.stringify(formData),
-    //       });
+        setStatus("loading");  // Mettre l'état sur "envoi en cours"
 
-    //       if (response.ok) {
-    //         setStatus("success");
-    //         setFormData({ name: "", email: "", message: "" });
-    //       } else {
-    //         setStatus("error");
-    //       }
-    //     } catch (error) {
-    //       console.error(error);
-    //       setStatus("error");
-    //     }
-    //   };
-
+        // Envoi du formulaire avec EmailJS
+        emailjs.sendForm(
+            'service_enef6fj', // Ton ID de service EmailJS (ex: Gmail, Outlook...)
+            'template_jr2hfor', // L'ID de ton template d'email (celui que tu as créé dans EmailJS)
+            e.target,  // Référence au formulaire
+            'r8A6B-ypNSzLHDgez' // Ton ID utilisateur EmailJS
+        )
+            .then((result) => {
+                setStatus("success");
+                setFormData({ name: "", email: "", entreprise: "", message: "" });  // Réinitialiser le formulaire
+            }, (error) => {
+                setStatus("error");
+                console.error("Erreur lors de l'envoi du message : ", error);
+            });
+    };
 
     return (
         <div className="min-h-screen flex items-center justify-center">
+            <div id="contact" className="h-1" />
             <form
-                onSubmit={handleChange}
+                onSubmit={handleSubmit}
                 className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full border-2 border-yellow-100 max-w-lg"
             >
                 <h1 className="text-2xl mb-4 text-center text-black">Me contacter</h1>
                 <h1 className="text-2xl mb-4 text-center text-black">Petit message pour en savoir plus ?</h1>
 
                 <div className="mb-4">
-                    <label className="block text-gray-700 text-sm  mb-2" htmlFor="name">
+                    <label className="block text-gray-700 text-sm mb-2" htmlFor="name">
                         Nom
                     </label>
                     <input
@@ -93,8 +64,8 @@ export default function Contact() {
                 </div>
 
                 <div className="mb-4">
-                    <label className="block text-gray-700 text-sm  mb-2" htmlFor="name">
-                        Entreprise / services
+                    <label className="block text-gray-700 text-sm mb-2" htmlFor="entreprise">
+                        Entreprise / service
                     </label>
                     <input
                         type="text"

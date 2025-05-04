@@ -19,7 +19,7 @@ export default function Header() {
 
     return (
         // <header className="w-full h-20 flex items-center justify-between px-4 bg-yellow-300 shadow-md relative z-10">
-        <header className="fixed bg-opacity-70 top-0 left-0 right-0 w-full h-20 flex items-center justify-between px-4 bg-yellow-300 shadow-md z-50">
+        <header className="fixed bg-black bg-opacity-100 top-0 left-0 right-0 w-full h-20 flex items-center justify-between px-4  shadow-md z-50">
 
             {/* Logo */}
             <Image
@@ -33,7 +33,7 @@ export default function Header() {
 
             {/* Bouton hamburger pour mobile */}
             <button
-                className="md:hidden text-black z-20"
+                className="md:hidden text-white z-20"
                 onClick={toggleMenu}
             >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -49,7 +49,7 @@ export default function Header() {
             >
                 <ul className="flex flex-col md:flex-row w-full md:w-auto text-center">
                     {[
-                        { id: 'introdution', label: 'Introduction' },
+                        { id: 'introduction', label: 'Introduction' },
                         { id: 'skills', label: 'Compétences' },
                         { id: 'projects', label: 'Projets' },
                         { id: 'contact', label: 'Contact' },
@@ -57,7 +57,7 @@ export default function Header() {
                         <li key={id} className="md:mx-2 my-2 md:my-0">
                             <button
                                 onClick={() => smoothScroll(id)}
-                                className="w-full text-black hover:text-black hover:bg-greenPastel-100 px-4 py-2 rounded"
+                                className="w-full text-white hover:text-black hover:bg-greenPastel-100 px-4 py-2 rounded"
                             >
                                 {label}
                             </button>

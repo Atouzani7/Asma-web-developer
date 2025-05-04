@@ -1,7 +1,7 @@
 export default function Skills() {
     return (
         // <div className="flex justify-center items-center h-[70vh] md:h-[60vh] lg:h-[80vh] max-h-[80vh] p-4 bg-black text-white">
-        <div className="flex justify-center items-center h-[70vh] md:h-[60vh] lg:h-[70vh] max-h-[80vh] p-4 bg-black text-white">
+        <div id="skills" className="flex justify-center items-center h-[70vh] md:h-[60vh] lg:h-[70vh] max-h-[80vh] p-4 bg-black text-white">
 
             <div className="w-full max-w-4xl">
                 {/* Titre */}
@@ -38,8 +38,8 @@ export default function Skills() {
                                 <td className="border-l-2 border-black px-4 py-2 text-black">🧪 Cypress, Jest</td>
                             </tr>
                             <tr className="bg-greenPastel-100">
-                                <td className="border-r-2 border-black px-4 py-2 text-black">📆 Méthode de travail</td>
-                                <td className="border-l-2 border-black px-4 py-2 text-black">🔄 Agile</td>
+                                <td className="border-r-2 border-black px-4 py-2 text-black">📆 Autres outils</td>
+                                <td className="border-l-2 border-black px-4 py-2 text-black">🔄 Agile, 🎨 Figma</td>
                             </tr>
                         </tbody>
                     </table>

@@ -81,7 +81,7 @@ export default function Project() {
 
     return (
 
-        <div className=" grid place-items-center h-auto min-h-[70vh] p-2 bg-black text-white">
+        <div className=" grid place-items-center h-auto min-h-[70vh] p-2 bg-black text-white" id="projects">
             <h2 className="text-2xl md:text-3xl font-Avenir text-center mb-6">Projets</h2>
 
             <div className="flex flex-wrap gap-6 md:gap-8 justify-center items-center">

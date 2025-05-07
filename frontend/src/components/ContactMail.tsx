@@ -12,7 +12,7 @@ const ContactForm = () => {
     const [status, setStatus] = useState<string | null>(null);  // Message de succès ou erreur
 
     // Fonction de gestion des changements dans le formulaire
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
@@ -20,14 +20,14 @@ const ContactForm = () => {
     };
 
     // Fonction d'envoi du formulaire
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();  // Empêche le rechargement de la page lors de l'envoi
 
         // Utilisation de l'API EmailJS
         emailjs.sendForm(
             'service_enef6fj', // Ton ID de service (trouvé dans EmailJS)
             'your_template_id', // Ton ID de template (trouvé dans EmailJS)
-            e.target, // L'élément du formulaire
+            e.target as HTMLFormElement, // L'élément du formulaire
             'your_user_id' // Ton ID utilisateur (trouvé dans EmailJS)
         )
             .then((result) => {

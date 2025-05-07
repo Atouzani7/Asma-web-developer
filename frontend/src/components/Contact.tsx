@@ -39,8 +39,8 @@ export default function Contact() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center">
-            <div id="contact" className="h-1" />
+        <div id="contact" className="min-h-screen flex items-center justify-center">
+            <div className="h-1" />
             <form
                 onSubmit={handleSubmit}
                 className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full border-2 border-yellow-100 max-w-lg"

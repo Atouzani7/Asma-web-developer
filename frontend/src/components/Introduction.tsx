@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import ButtonCV from "./ButtonCV";
 import ButtonMail from "./ButtonMail";
+import SpinLoading from "./SpinLoading";
 
 export default function Introduction() {
     interface Profile {
@@ -44,46 +45,49 @@ export default function Introduction() {
 
 
     if (!profile) {
-        return <div className="text-white text-center mt-20">Chargement...</div>;
+        return <SpinLoading />;
     }
 
 
     return (
-        <div className="flex justify-center items-center h-[70vh] md:h-[60vh] lg:h-[70vh] max-h-[80vh] p-4 mt-20  bg-black text-white">
-            <div id="introduction" className="w-full max-w-4xl">
-                {/* Avatar et introduction */}
-                <div className="flex flex-row gap-8 m-auto  p-2 justify-center items-center ">
-                    <Image
-                        src={profile.image}
-                        alt="avatar"
-                        width={180}
-                        height={38}
-                        priority
-                        className="rounded-full"
-                    />
-                    <p className="text-2xl font-GillSans text-center md:text-left">
-                        👋 Hello ! Moi c&apos;est {profile.name},<br />
-                    </p>
+        <div id="introduction" className="min-h-screen flex items-center justify-center  bg-blur-md bg-cover bg-center h-80">
+
+
+            {/* <BlobSection /> */}
+            <div className="flex justify-center items-center h-[70vh] md:h-[60vh] lg:h-[70vh] w-full max-h-[80vh] p-4 mt-20 lg:mt-[10vh] lg:p-[2vh] bg-black text-white">
+                <div className="w-full max-w-4xl">
+
+                    {/* Avatar et introduction */}
+                    <div className="flex flex-row gap-8 m-auto  p-2 justify-center items-center ">
+                        <Image
+                            src={profile.image}
+                            alt="avatar"
+                            width={180}
+                            height={38}
+                            priority
+                            className="rounded-full animate-fadeInUp"
+                        />
+                        <p className="text-2xl font-GillSans text-center md:text-left">
+                            👋 Hello ! Moi c&apos;est {profile.name},<br />
+                        </p>
+                    </div>
+
+                    {/* Texte principal */}
+                    <div className="mt-4">
+                        <p className="lg:text-xl font-GillSans text-center mx-auto w-3/4 p-4">
+                            {profile?.description}
+                        </p>
+                    </div>
+
+                    {/* Boutons */}
+                    <div className="mt-4 flex justify-center gap-4">
+                        <ButtonCV />
+                        <ButtonMail />
+
+
+                    </div>
                 </div>
-
-                {/* Texte principal */}
-                <div className="mt-4">
-                    <p className="lg:text-xl font-GillSans text-center mx-auto w-3/4 p-4">
-                        {profile?.description}
-                    </p>
-                </div>
-
-                {/* Boutons */}
-                <div className="mt-4 flex justify-center gap-4">
-                    <ButtonCV />
-                    <ButtonMail />
-
-
-                    {/* <a href="/CV.Touzani.Asma.pdf" download="/CV.Touzani.Asma.pdf" target="_blank" rel="noopener noreferrer">
-                        <button>Télécharger mon CV</button>
-                    </a> */}
-                </div>
-            </div>
-        </div >
+            </div >
+        </div>
     );
 }

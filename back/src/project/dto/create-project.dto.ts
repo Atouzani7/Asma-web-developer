@@ -22,6 +22,10 @@ export class CreateProjectDto {
 
   @IsString()
   @IsOptional()
+  details?: string;
+
+  @IsString()
+  @IsOptional()
   link?: string;
 
   @IsArray()

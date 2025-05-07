@@ -34,7 +34,7 @@ export class Skill {
 
   // @ManyToMany(() => Project, (project) => project.skill)
   // projects: Project[];
-  @ManyToOne(() => Project, (project) => project.skill)
+  @ManyToOne(() => Project, (project) => project.skills)
   project: Project;
 
   @ManyToMany(() => Profile, (profile) => profile.skills)

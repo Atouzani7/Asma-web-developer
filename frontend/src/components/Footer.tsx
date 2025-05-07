@@ -1,13 +1,23 @@
-// components/Footer.js
+import Image from "next/image";
 export default function Footer() {
     return (
         <footer className="bg-black text-gray-200 py-6">
             <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
-                {/* Informations principales */}
-                <div className="mb-4 md:mb-0">
-                    <h4 className="text-lg font-bold">Asma Touzani</h4>
-                    <p>Développeur Web</p>
+                <div className="flex flex-col md:flex-row items-center mb-4 md:mb-0">
+                    <Image
+                        src="/logoAT.svg"
+                        alt="Logo"
+                        width={50}
+                        height={50}
+                        className="mb-4 md:mb-0"
+                    />
+                    {/* Informations principales */}
+                    <div className="mb-4 md:mb-0">
+                        <h4 className="text-lg font-bold">Asma Touzani</h4>
+                        <p>Développeuse Web</p>
+                    </div>
                 </div>
+
 
                 {/* Liens sociaux */}
                 <div className="flex space-x-4 mb-4 md:mb-0">

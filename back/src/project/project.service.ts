@@ -26,11 +26,11 @@ export class ProjectService {
   async findAll(): Promise<Project[]> {
     // Récupérer tous les projets avec leurs compétences associées
     const projects = await this.projectRepository.find({
-      relations: ['skill'],
+      relations: ['skills'],
     });
     // console.log('Projets récupérés:', projects);
     for (const project of projects) {
-      // console.log(project.skill.map((s) => s.name));
+      console.log(project.skills.map((s) => s.name));
       // const skills = await this.skillsService.findAll();
       // console.log(
       //   'Skills récupérées:',
@@ -59,13 +59,15 @@ export class ProjectService {
     project.description = updateProjectDto.description ?? project.description;
     project.image = updateProjectDto.image ?? project.image;
     project.link = updateProjectDto.link ?? project.link;
+    project.details = updateProjectDto.details ?? project.details;
+    project.skills = project.skills ?? project.skills;
 
     // Mise à jour des skills (relation)
     if (updateProjectDto.skill && Array.isArray(updateProjectDto.skill)) {
       const skillEntities = await this.skillRepository.find({
         where: { id: In(updateProjectDto.skill) },
       });
-      project.skill = skillEntities;
+      project.skills = skillEntities;
     }
 
     console.log('Mise à jour du projet:', project);

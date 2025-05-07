@@ -84,6 +84,7 @@ export default function Introduction() {
                         <ButtonCV />
                         <ButtonMail />
 
+
                     </div>
                 </div>
             </div >

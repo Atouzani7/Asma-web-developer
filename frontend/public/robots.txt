@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://asma-web-developer.vercel.app
+
+# Sitemaps
+Sitemap: https://asma-web-developer.vercel.app/sitemap.xml

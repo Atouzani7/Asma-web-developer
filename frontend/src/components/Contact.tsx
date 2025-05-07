@@ -10,7 +10,7 @@ export default function Contact() {
         message: "",
     });
 
-    const [status, setStatus] = useState<"loading" | "success" | "error" | null>(null);  // Statut de l'envoi (loading, success, error)
+    const [status, setStatus] = useState<"loading" | "success" | "error" | null>(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -20,16 +20,17 @@ export default function Contact() {
     const handleSubmit = (e) => {
         e.preventDefault();  // Empêcher le rechargement de la page
 
-        setStatus("loading");  // Mettre l'état sur "envoi en cours"
+        setStatus("loading");
 
         // Envoi du formulaire avec EmailJS
         emailjs.sendForm(
-            'service_enef6fj', // Ton ID de service EmailJS (ex: Gmail, Outlook...)
-            'template_jr2hfor', // L'ID de ton template d'email (celui que tu as créé dans EmailJS)
+            'service_enef6fj', // ID de service EmailJS (ex: Gmail, Outlook...)
+            'template_jr2hfor', // L'ID du template d'email (celui que tu as créé dans EmailJS)
             e.target,  // Référence au formulaire
-            'r8A6B-ypNSzLHDgez' // Ton ID utilisateur EmailJS
+            'r8A6B-ypNSzLHDgez' // ID utilisateur EmailJS
         )
             .then((result) => {
+                console.log("Message envoyé : ", result.text);
                 setStatus("success");
                 setFormData({ name: "", email: "", entreprise: "", message: "" });  // Réinitialiser le formulaire
             }, (error) => {
@@ -118,7 +119,7 @@ export default function Contact() {
 
                 {status === "loading" && <p className="text-blue-500 mt-4">Envoi en cours...</p>}
                 {status === "success" && <p className="text-green-500 mt-4">Message envoyé avec succès !</p>}
-                {status === "error" && <p className="text-red-500 mt-4">Erreur lors de l'envoi. Réessayez plus tard.</p>}
+                {status === "error" && <p className="text-red-500 mt-4">Erreur lors de l&apos;envoi. Réessayez plus tard.</p>}
             </form>
         </div>
     );

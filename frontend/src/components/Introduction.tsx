@@ -23,25 +23,26 @@ export default function Introduction() {
 
     const finalUrl = `${baseUrl}/profile`;
     // const response = await fetch(`${baseUrl}/project`);
-    const fetchProfile = async () => {
-        try {
-            const response = await fetch(finalUrl);
-            if (!response.ok) {
-                throw new Error("Erreur lors de la récupération des données");
-            }
-            const data = await response.json();
-            console.log("data", data);
-            console.log("data id profil", data.name);
-            setProfile(data[0] as Profile);
-        } catch (error) {
-            console.error("Erreur lors de la récupération des données", error);
-        }
-    };
 
 
     useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const response = await fetch(finalUrl);
+                if (!response.ok) {
+                    throw new Error("Erreur lors de la récupération des données");
+                }
+                const data = await response.json();
+                console.log("data", data);
+                console.log("data id profil", data.name);
+                setProfile(data[0] as Profile);
+            } catch (error) {
+                console.error("Erreur lors de la récupération des données", error);
+            }
+        };
         fetchProfile();
     }, []);
+
 
 
     if (!profile) {

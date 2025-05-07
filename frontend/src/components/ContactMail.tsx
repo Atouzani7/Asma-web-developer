@@ -9,7 +9,7 @@ const ContactForm = () => {
         message: ''
     });
 
-    const [status, setStatus] = useState(null);  // Message de succès ou erreur
+    const [status, setStatus] = useState<string | null>(null);  // Message de succès ou erreur
 
     // Fonction de gestion des changements dans le formulaire
     const handleChange = (e) => {
@@ -31,9 +31,11 @@ const ContactForm = () => {
             'your_user_id' // Ton ID utilisateur (trouvé dans EmailJS)
         )
             .then((result) => {
+                console.log('Message envoyé : ', result.text);
                 setStatus('Message envoyé avec succès !');
                 setFormData({ name: '', email: '', message: '' });  // Réinitialise le formulaire
             }, (error) => {
+                console.error('Erreur lors de l\'envoi du message : ', error);
                 setStatus('Une erreur est survenue, réessayez.');
             });
     };

@@ -40,6 +40,8 @@ export default function Project() {
             setProjects(data);
             setLoading(false);
         } catch (error) {
+            console.error("Erreur lors de la récupération des projets:", error);
+            setError(true);
             setLoading(false);
         }
     };

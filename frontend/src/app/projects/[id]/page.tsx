@@ -8,13 +8,19 @@ import Image from "next/image";
 import SpinLoading from "@/components/SpinLoading";
 import Footer from "@/components/Footer";
 
+interface Skill {
+    id: number;
+    name: string;
+    image: string;
+}
+
 interface Project {
     id: number;
     name: string;
     description: string;
     image: string;
     link: string;
-    skills: Array;
+    skills: Skill[];
 }
 
 export default function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
@@ -26,31 +32,35 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
     const [project, setProject] = useState<Project | null>(null);
     const [error, setError] = useState(false);
 
-    const fetchProject = async () => {
-        try {
-            const response = await fetch(`${baseUrl}/project`, {
-                cache: "no-store",
-            });
-
-            if (!response.ok) throw new Error("Failed to fetch projects");
-
-            const projects: Project[] = await response.json();
-            const found = projects.find((p) => p.id === Number(id));
-            console.log("Project ID:", response);
-
-            if (!found) {
-                setError(true);
-            } else {
-                setProject(found);
-            }
-        } catch (err) {
-            setError(true);
-        }
-    };
 
     useEffect(() => {
+        const fetchProject = async () => {
+            try {
+                const response = await fetch(`${baseUrl}/project`, {
+                    cache: "no-store",
+                });
+
+                if (!response.ok) throw new Error("Failed to fetch projects");
+
+                const projects: Project[] = await response.json();
+                const found = projects.find((p) => p.id === Number(id));
+                console.log("Project ID:", response);
+
+                if (!found) {
+                    setError(true);
+                } else {
+                    setProject(found);
+                }
+            } catch (err) {
+                console.error(err);
+                setError(true);
+            }
+        };
+
+
         fetchProject();
     }, [id]);
+
 
     if (error) return <ErrorProject />;
     if (!project) return <div className="text-white text-center mt-20"><SpinLoading /> </div>;
@@ -60,7 +70,7 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
     const nextProjectId = project.id === totalProjects ? 1 : project.id + 1;
 
 
-    const SkillBadge = ({ skill }: { skill: any }) => (
+    const SkillBadge = ({ skill }: { skill: Skill }) => (
         <span className="bg-greenPastel-100 text-black text-sm font-medium px-3 py-1 rounded-full">
             {skill.name}
             <Image
@@ -112,7 +122,7 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                     <h4 className="text-sm md:text-base font-bold text-white ">Technologies utilisées</h4><br />
 
                     <div className="flex flex-wrap gap-2">
-                        {project.skills.map((skill: any) => (
+                        {project.skills.map((skill: Skill) => (
                             <SkillBadge key={skill.id} skill={skill} />
                         ))}
                     </div>

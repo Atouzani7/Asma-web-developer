@@ -22,10 +22,10 @@ export default function Footer() {
                 {/* Liens sociaux */}
                 <div className="flex space-x-4 mb-4 md:mb-0">
                     <a href="https://www.linkedin.com/in/asma-touzani-077268251/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                        <img src="/linkerdin.png" alt="LinkedIn" className="w-6 h-6" />
+                        <Image src="/linkerdin.png" alt="LinkedIn" width={50} height={50} className="w-6 h-6" />
                     </a>
                     <a href="https://github.com/Atouzani7" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                        <img src="/github.png" alt="GitHub" className="w-6 h-6" />
+                        <Image src="/github.png" alt="GitHub" width={50} height={50} className="w-6 h-6" />
                     </a>
                 </div>
 

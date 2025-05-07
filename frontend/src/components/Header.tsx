@@ -28,7 +28,7 @@ export default function Header() {
                 width={95}
                 height={20}
                 priority
-                className="z-20"
+                className="z-20 mt-4"
             />
 
             {/* Bouton hamburger pour mobile */}

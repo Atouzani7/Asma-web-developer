@@ -12,12 +12,12 @@ export default function Contact() {
 
     const [status, setStatus] = useState<"loading" | "success" | "error" | null>(null);
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();  // Empêcher le rechargement de la page
 
         setStatus("loading");
@@ -26,7 +26,7 @@ export default function Contact() {
         emailjs.sendForm(
             'service_enef6fj', // ID de service EmailJS (ex: Gmail, Outlook...)
             'template_jr2hfor', // L'ID du template d'email (celui que tu as créé dans EmailJS)
-            e.target,  // Référence au formulaire
+            e.target as HTMLFormElement,  // Référence au formulaire
             'r8A6B-ypNSzLHDgez' // ID utilisateur EmailJS
         )
             .then((result) => {

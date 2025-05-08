@@ -5,7 +5,7 @@ export default function TestEnv() {
 
     return (
         <div>
-            <h1>Test des Variables d'Environnement</h1>
+            <h1>Test des Variables d&apos;Environnement</h1>
             <p>API URL: {process.env.NEXT_PUBLIC_API_URL}</p>
 
 

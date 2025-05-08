@@ -59,7 +59,7 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
 
 
         fetchProject();
-    }, [id]);
+    }, [id, baseUrl]);
 
 
     if (error) return <ErrorProject />;

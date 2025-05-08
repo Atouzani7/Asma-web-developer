@@ -23,7 +23,7 @@ export default function Project() {
         try {
             setLoading(true);
 
-            const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+            const baseUrl = process.env.NEXT_PUBLIC_API_URL;
             console.log('Using API base URL:', baseUrl);
             const finalUrl = `${baseUrl}/project`;
             console.log('✅ URL utilisée dans fetch:', finalUrl);

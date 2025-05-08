@@ -1,13 +1,5 @@
 import { Profile } from 'src/profile/entities/profile.entity';
-import {
-  Column,
-  Entity,
-  Generated,
-  ManyToMany,
-  ManyToOne,
-  PrimaryColumn,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Formation {

@@ -1,7 +1,7 @@
 import { Body, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateSkillDto } from './dto/create-skill.dto';
 import { UpdateSkillDto } from './dto/update-skill.dto';
-import { DeleteResult, In, Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Skill } from './entities/skill.entity';
 
@@ -36,6 +36,9 @@ export class SkillsService {
 
   async remove(id: number): Promise<DeleteResult> {
     const profile = await this.findOne(id);
+    if (!profile) {
+      throw new NotFoundException(`Skill with ID ${id} not found`);
+    }
     return this.skillRepository.delete(id);
   }
 }

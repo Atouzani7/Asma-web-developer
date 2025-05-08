@@ -36,6 +36,9 @@ export class CompanyService {
 
   async remove(id: number): Promise<DeleteResult> {
     const company = await this.findOne(id);
+    if (!company) {
+      throw new Error('Company not found');
+    }
     return this.companyRepository.delete(id);
   }
 }

@@ -1,7 +1,7 @@
 import { Body, Injectable } from '@nestjs/common';
 import { CreateFormationDto } from './dto/create-formation.dto';
 import { UpdateFormationDto } from './dto/update-formation.dto';
-import { DeleteResult, In, Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Formation } from './entities/formation.entity';
 
@@ -13,9 +13,9 @@ export class FormationService {
   ) {}
 
   async create(
-    @Body() CreateFormationDto: CreateFormationDto,
+    @Body() createFormationDto: CreateFormationDto,
   ): Promise<Formation> {
-    const formation = await this.formationRepository.create(CreateFormationDto);
+    const formation = await this.formationRepository.create(createFormationDto);
     console.log('par ici le service', formation);
     return await this.formationRepository.save(formation);
   }
@@ -39,6 +39,9 @@ export class FormationService {
 
   remove(id: number): Promise<DeleteResult> {
     const formation = this.findOne(id);
+    if (!formation) {
+      throw new Error('Formation not found');
+    }
     return this.formationRepository.delete(id);
   }
 }

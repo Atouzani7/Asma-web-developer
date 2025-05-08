@@ -17,9 +17,7 @@ export default function Introduction() {
 
     const [profile, setProfile] = useState<Profile | null>(null);
 
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL
-        ? process.env.NEXT_PUBLIC_API_URL
-        : 'http://localhost:4000';
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
     const finalUrl = `${baseUrl}/profile`;
     // const response = await fetch(`${baseUrl}/project`);

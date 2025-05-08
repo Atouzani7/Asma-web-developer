@@ -27,7 +27,7 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
     const { id } = use(params);
     const router = useRouter();
 
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
     const [project, setProject] = useState<Project | null>(null);
     const [error, setError] = useState(false);

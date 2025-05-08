@@ -30,7 +30,7 @@ export class Project {
   video: string;
 
   @Column()
-  link: string;
+  link?: string;
 
   @OneToMany(() => Profile, (profile) => profile.projects)
   profile: Profile[];

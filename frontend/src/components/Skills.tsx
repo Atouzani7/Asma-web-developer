@@ -1,12 +1,12 @@
 export default function Skills() {
     return (
 
-        <div id="skills" className="min-h-screen flex items-center justify-center">
+        <div id="skills" className="min-h-90 flex items-center justify-center">
 
 
 
             {/* // <div className="flex justify-center items-center h-[70vh] md:h-[60vh] lg:h-[80vh] max-h-[80vh] p-4 bg-black text-white"> */}
-            <div className="flex justify-center items-center h-[70vh] md:h-[60vh] lg:h-[70vh] max-h-[80vh] p-4 mt-4 bg-black text-white">
+            <div className="flex justify-center items-center h-[70vh] md:h-[60vh] lg:h-[70vh] max-h-[80vh] bg-black text-white">
 
                 <div className="w-full max-w-4xl">
                     {/* Titre */}

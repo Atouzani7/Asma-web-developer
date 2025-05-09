@@ -18,17 +18,16 @@ export default function Header() {
     };
 
     return (
-        // <header className="w-full h-20 flex items-center justify-between px-4 bg-yellow-300 shadow-md relative z-10">
-        <header className="fixed bg-black bg-opacity-100 top-0 left-0 right-0 w-full h-20 flex items-center justify-between px-4  shadow-md z-50">
+        <header className="fixed bg-black bg-opacity-100 top-0 left-0 right-0 w-full h-20 flex items-center justify-between px-4 shadow-md z-50">
 
             {/* Logo */}
             <Image
                 src="/logoAT.svg"
                 alt="logo"
-                width={95}
-                height={20}
+                width={79}
+                height={17}
                 priority
-                className="z-20 mt-4"
+                className="z-20 mt-2 "
             />
 
             {/* Bouton hamburger pour mobile */}

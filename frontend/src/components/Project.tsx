@@ -63,7 +63,7 @@ export default function Project() {
 
     return (
 
-        <div id="projects" className="min-h-screen flex items-center justify-center ">
+        <div id="projects" className="min-h-80 flex items-center justify-center ">
 
 
 

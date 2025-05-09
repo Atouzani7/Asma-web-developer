@@ -49,11 +49,10 @@ export default function Introduction() {
 
 
     return (
-        <div id="introduction" className="min-h-screen flex items-center justify-center  bg-blur-md bg-cover bg-center h-80">
+        <div id="introduction" className="min-h-screen flex items-center justify-center bg-blur-md bg-cover bg-center h-80">
+            <div className="flex justify-center items-center h-[70vh] md:h-[60vh] lg:h-[70vh] mt-[10vh] lg:mt-0 w-full max-h-[80vh] lg:p-[2vh] bg-black text-white">
 
 
-            {/* <BlobSection /> */}
-            <div className="flex justify-center items-center h-[70vh] md:h-[60vh] lg:h-[70vh] w-full max-h-[80vh] p-4 mt-20 lg:mt-[10vh] lg:p-[2vh] bg-black text-white">
                 <div className="w-full max-w-4xl">
 
                     {/* Avatar et introduction */}

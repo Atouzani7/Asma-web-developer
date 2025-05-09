@@ -1,0 +1,13 @@
+name: Ping Render backend
+
+on:
+  schedule:
+    - cron: "*/10 6-22 * * *" # UTC → 8h à minuit heure de Paris
+  workflow_dispatch: # permet de le lancer manuellement si besoin
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🐧 Ping Render API
+        run: curl -s "https://asma-web-developer.onrender.com" | grep -q "200 OK" || echo "Render API is down"

@@ -18,7 +18,7 @@ import { Skill } from './skills/entities/skill.entity';
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      // url: process.env.DATABASE_URL,
+      url: process.env.DATABASE_URL,
       host: 'localhost',
       port: 5432,
       username: process.env.DB_USERNAME,

@@ -78,7 +78,7 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                 alt={skill.name}
                 width={20}
                 height={20}
-                className="inline ml-2"
+                className="inline ml-2 "
             />
         </span>
     );
@@ -96,7 +96,7 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
                         width={95}
                         height={20}
                         priority
-                        className="z-20"
+                        className="z-20 lg:mb-4"
                     />
                 </button>
 

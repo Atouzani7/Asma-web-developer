@@ -49,11 +49,11 @@ export default function Introduction() {
 
 
     return (
-        <div id="introduction" className="min-h-screen flex items-center justify-center bg-blur-md bg-cover bg-center h-80">
-            <div className="flex justify-center items-center h-[70vh] md:h-[60vh] lg:h-[70vh] mt-[10vh] lg:mt-0 w-full max-h-[80vh] lg:p-[2vh] bg-black text-white">
+        <div id="introduction" className="min-h-screen flex items-center justify-center bg-cover bg-center h-80 ">
+            <div className="flex justify-center items-center h-[70vh] md:h-[60vh] lg:h-[70vh] mt-[10vh] lg:mt-0 w-full max-h-[80vh] lg:p-[2vh] bg-black text-white bo">
 
 
-                <div className="w-full max-w-4xl">
+                <div className="w-full max-w-4xl ">
 
                     {/* Avatar et introduction */}
                     <div className="flex flex-row gap-8 m-auto  p-2 justify-center items-center ">
@@ -63,9 +63,9 @@ export default function Introduction() {
                             width={180}
                             height={38}
                             priority
-                            className="rounded-full animate-fadeInUp"
+                            className="rounded-full animate-fadeInUp mt-4"
                         />
-                        <p className="text-2xl font-GillSans text-center md:text-left">
+                        <p className="text-2xl font-GillSans text-center md:text-left mt-20 lg:mt-0">
                             👋 Hello ! Moi c&apos;est {profile.name},<br />
                         </p>
                     </div>
@@ -73,12 +73,13 @@ export default function Introduction() {
                     {/* Texte principal */}
                     <div className="mt-4">
                         <p className="lg:text-xl font-GillSans text-center mx-auto w-3/4 p-4">
+
                             {profile?.description}
                         </p>
                     </div>
 
                     {/* Boutons */}
-                    <div className="mt-4 flex justify-center gap-4 lg:mb-15">
+                    <div className="mt-4 flex justify-center gap-4 h-[15vh]">
                         <ButtonCV />
                         <ButtonMail />
 

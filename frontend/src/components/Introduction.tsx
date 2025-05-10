@@ -78,7 +78,7 @@ export default function Introduction() {
                     </div>
 
                     {/* Boutons */}
-                    <div className="mt-4 flex justify-center gap-4 mb-10">
+                    <div className="mt-4 flex justify-center gap-4 lg:mb-15">
                         <ButtonCV />
                         <ButtonMail />
 

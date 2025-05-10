@@ -73,7 +73,7 @@ export default function Project() {
                 <div className="flex flex-wrap gap-6 md:gap-8 justify-center items-center">
                     {projects.sort((a, b) => a.id - b.id).map((project, index) => (
                         <div
-                            key={project.id ?? index} // ✅ id si dispo, sinon index
+                            key={project.id ?? index}
                             className="relative w-[90%] sm:w-[300px] h-[200px] sm:h-[220px] md:h-[250px] rounded-lg overflow-hidden group"
                         >
                             <div className="relative w-full h-full flex justify-center items-center rounded-lg overflow-hidden group ">
@@ -83,7 +83,7 @@ export default function Project() {
                                     alt={project.name}
                                     width={300}
                                     height={250}
-                                    className="object-cover  transition-transform duration-300 group-hover:scale-105 "
+                                    className="object-cover mt-4 mb-4  transition-transform duration-300 group-hover:scale-105 "
                                 />
 
 

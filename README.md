@@ -13,11 +13,6 @@ https://asma-web-developer.vercel.app
     - Postgres 
     - deploiement : vercel + render 
 
-# Se connecter à la BDD
-psql -U asma -d postgres
-Quitter postgres
-\q
-
 # commande pour lancer le front : 
 pm run dev
 

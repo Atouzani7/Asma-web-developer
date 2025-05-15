@@ -2,7 +2,7 @@ name: Ping Render backend
 
 on:
   schedule:
-    - cron: "*/13 6-23 * * *" # UTC → 8h à minuit heure de Paris
+    - cron: "*/13 6-23 * * *" # UTC → 8h à minuit heure de Paris 
   workflow_dispatch: # permet de le lancer manuellement si besoin
 
 jobs:

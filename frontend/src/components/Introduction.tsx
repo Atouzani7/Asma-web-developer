@@ -26,9 +26,10 @@ export default function Introduction() {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const response = await fetch(finalUrl);
+                // const response = await fetch(finalUrl);
+                const response = await fetch("/data/profile.json");
                 if (!response.ok) {
-                    throw new Error("Erreur lors de la récupération des données");
+                    throw Error("Erreur lors de la récupération des données");
                 }
                 const data = await response.json();
                 console.log("data", data);

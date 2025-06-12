@@ -28,12 +28,13 @@ export default function Project() {
             const finalUrl = `${baseUrl}/project`;
             console.log('✅ URL utilisée dans fetch:', finalUrl);
 
-            const response = await fetch(`${baseUrl}/project`);
+            // const response = await fetch(`${baseUrl}/project`);
+            const response = await fetch("/data/project.json");
 
 
 
             if (!response.ok) {
-                throw new Error("Erreur lors de la récupération des projets");
+                throw Error("Erreur lors de la récupération des projets");
             }
             const data = await response.json();
 

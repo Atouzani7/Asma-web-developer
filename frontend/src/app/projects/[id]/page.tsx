@@ -36,7 +36,9 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
     useEffect(() => {
         const fetchProject = async () => {
             try {
-                const response = await fetch(`${baseUrl}/project`, {
+                // const response = await fetch(`${baseUrl}/project`, {
+                const response = await fetch(`/data/project.json`, {
+
                     cache: "no-store",
                 });
 
@@ -44,7 +46,7 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
 
                 const projects: Project[] = await response.json();
                 const found = projects.find((p) => p.id === Number(id));
-                console.log("Project ID:", response);
+                console.log("Skills ID:", response);
 
                 if (!found) {
                     setError(true);
@@ -61,6 +63,7 @@ export default function ProjectPage({ params }: { params: Promise<{ id: string }
         fetchProject();
     }, [id, baseUrl]);
 
+    console.log("Project:", project?.skills);
 
     if (error) return <ErrorProject />;
     if (!project) return <div className="text-white text-center mt-20"><SpinLoading /> </div>;

@@ -14,7 +14,7 @@ https://asma-web-developer.vercel.app
     - deploiement : vercel + render 
 
 # commande pour lancer le front : 
-pm run dev
+npm run dev
 
 # commande pour lancer la back : 
 npm run start:dev 
